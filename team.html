@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teams - SPL Auction</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Teams</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="team.html">Teams</a>
+          </nav>
+  </header>
+
+  <main class="teams">
+    <h2 style="text-align:center">All Teams</h2>
+    <div id="teams-container" class="teams"></div>
+  </main>
+
+  <div id="team-details" class="admin-panel" style="display: none;">
+    <h2 id="team-name"></h2>
+    <h3>Players</h3>
+    <ul id="player-list"></ul>
+    <button onclick="closeDetails()">Close</button>
+  </div>
+
+  <script src="team.js"></script>
+</body>
+</html>
