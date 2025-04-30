@@ -47,5 +47,36 @@
   </div>
 
   <script src="team.js"></script>
+
+<script>
+const backendURL = "https://spl-auction-backend.onrender.com";
+
+async function loadTeams() {
+  const teamRes = await fetch(`${backendURL}/api/teams`);
+  const teams = await teamRes.json();
+
+  const playerRes = await fetch(`${backendURL}/api/players`);
+  const players = await playerRes.json();
+
+  const container = document.getElementById("teams-container");
+  container.innerHTML = "";
+
+  teams.forEach(team => {
+    const teamPlayers = players.filter(p => p.team_id === team.id);
+    const html = `
+      <div class="team-card">
+        <h3>${team.name}</h3>
+        <img src="${team.logo}" alt="${team.name}" style="max-height:100px" />
+        <ul>
+          ${teamPlayers.map(p => `<li>${p.name} - ${p.role}${p.isCaptain ? ' (C)' : ''}</li>`).join("")}
+        </ul>
+      </div>`;
+    container.innerHTML += html;
+  });
+}
+
+window.onload = loadTeams;
+</script>
+
 </body>
 </html>

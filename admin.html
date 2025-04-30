@@ -67,5 +67,40 @@
   </main>
 
   <script src="admin.js"></script>
+
+<script>
+const backendURL = "https://spl-auction-backend.onrender.com";
+
+// Submit new team
+function submitTeam() {
+  const name = document.getElementById("team-name").value;
+  const logo = document.getElementById("team-logo").value;
+
+  fetch(`${backendURL}/api/teams`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ name, logo })
+  }).then(res => res.json())
+    .then(data => alert("Team added successfully"))
+    .catch(err => alert("Error adding team"));
+}
+
+// Submit new player
+function submitPlayer() {
+  const name = document.getElementById("player-name").value;
+  const role = document.getElementById("player-role").value;
+  const isCaptain = document.querySelector("input[name='isCaptain']:checked")?.value === "true";
+  const teamId = document.getElementById("player-team").value;
+
+  fetch(`${backendURL}/api/players`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ name, role, isCaptain, team_id: teamId })
+  }).then(res => res.json())
+    .then(data => alert("Player added successfully"))
+    .catch(err => alert("Error adding player"));
+}
+</script>
+
 </body>
 </html>
