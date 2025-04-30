@@ -78,5 +78,42 @@ async function loadTeams() {
 window.onload = loadTeams;
 </script>
 
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  const socket = io("https://spl-auction-backend.onrender.com");
+
+  socket.on("new-team", (team) => {
+    console.log("New team added:", team);
+    const teamContainer = document.querySelector(".team-container");
+    if (teamContainer) {
+      const teamCard = document.createElement("div");
+      teamCard.className = "team-card";
+      teamCard.innerHTML = `
+        <img src="${team.logo}" alt="${team.name}" class="team-logo" />
+        <h3>${team.name}</h3>
+      `;
+      teamContainer.appendChild(teamCard);
+    }
+  });
+
+  socket.on("new-player", (player) => {
+    console.log("New player added:", player);
+    const teamSections = document.querySelectorAll(".team-card");
+    teamSections.forEach((card) => {
+      if (card.querySelector("h3")?.textContent === player.teamName) {
+        const playerList = card.querySelector(".player-list") || document.createElement("ul");
+        playerList.className = "player-list";
+        const li = document.createElement("li");
+        li.textContent = `${player.name} (${player.role})${player.isCaptain ? " 🧢" : ""}`;
+        playerList.appendChild(li);
+        if (!card.querySelector(".player-list")) {
+          card.appendChild(playerList);
+        }
+      }
+    });
+  });
+
+</script>
 </body>
 </html>
