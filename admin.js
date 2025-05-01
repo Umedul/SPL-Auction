@@ -16,7 +16,7 @@ function login() {
 
 // Function to fetch teams from the backend
 function fetchTeams() {
-    fetch('http://localhost:3000/api/teams')
+    fetch('https://spl-auction-backend.onrender.com/api/teams')  // Updated URL
         .then(response => response.json())
         .then(teams => {
             renderTeams(teams);
@@ -26,7 +26,7 @@ function fetchTeams() {
 
 // Function to fetch players from the backend
 function fetchPlayers() {
-    fetch('http://localhost:3000/api/players')
+    fetch('https://spl-auction-backend.onrender.com/api/players')  // Updated URL
         .then(response => response.json())
         .then(players => {
             renderPlayers(players);
@@ -39,7 +39,7 @@ function addTeam() {
     const name = document.getElementById("team-name").value;
     const newTeam = { name };
 
-    fetch('http://localhost:3000/api/teams', {
+    fetch('https://spl-auction-backend.onrender.com/api/teams', {  // Updated URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ function addPlayer() {
     const team = document.getElementById("player-team").value;
     const newPlayer = { name, team };
 
-    fetch('http://localhost:3000/api/players', {
+    fetch('https://spl-auction-backend.onrender.com/api/players', {  // Updated URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
