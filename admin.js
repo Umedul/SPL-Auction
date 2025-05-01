@@ -16,13 +16,19 @@ function login() {
 
 // Function to fetch teams from the backend
 function fetchTeams() {
-    fetch('https://spl-auction-backend.onrender.com/api/teams')  // Updated URL
-        .then(response => response.json())
-        .then(teams => {
-            renderTeams(teams)
-        })
-        .catch(error => console.error('Error fetching teams:', error));
-}
+        fetch('https://spl-auction-backend.onrender.com/api/teams')  // Updated URL
+            .then(response => {
+                // Check if the response is successful
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(teams => {
+                renderTeams(teams);
+            })
+            .catch(error => console.error('Error fetching teams:', error));
+    }
 
 // Function to fetch players from the backend
 function fetchPlayers() {
