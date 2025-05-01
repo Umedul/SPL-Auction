@@ -17,8 +17,8 @@ function login() {
 // Function to fetch teams from the backend
 function fetchTeams() {
     fetch('https://spl-auction-backend.onrender.com/api/teams')  // Updated URL
-        .then(response => response.json())
-        .then(teams = {
+        .then(response = response.json())
+        .then(teams => {
             renderTeams(teams);
         })
         .catch(error => console.error('Error fetching teams:', error));
