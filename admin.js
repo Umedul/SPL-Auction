@@ -31,7 +31,7 @@ function fetchPlayers() {
         .then(players => {
             renderPlayers(players);
         })
-        .catch(error => console.error('Error fetching players:', error));
+        .catch(error => console.error('Error fetching teams:', error));
 }
 
 // Function to add a new team
