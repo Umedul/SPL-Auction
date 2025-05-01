@@ -1,106 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin - SPL Auction</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <style>
-    @media (max-width: 768px) {
-      nav, .container, .content {
-        flex-direction: column !important;
-        width: 100% !important;
-      }
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-      table {
-        width: 100%;
-        overflow-x: auto;
-        display: block;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Team and Player Data</h1>
 
-  <header>
-    <h1>Admin Dashboard</h1>
-  </header>
+    <!-- Container to display the teams and players -->
+    <div id="team-container"></div>
 
-  <main class="admin-panel">
-    <section id="login-section">
-      <h2>Admin Login</h2>
-      <input type="password" id="admin-password" placeholder="Enter admin password" />
-      <button onclick="login()">Login</button>
-      <p id="login-error" class="error"></p>
-    </section>
-
-    <section id="dashboard" style="display: none;">
-      <h2>Welcome, Admin</h2>
-
-      <div class="form-box">
-        <h3>Add Team</h3>
-        <input type="text" id="team-name" placeholder="Team Name" />
-        <input type="file" id="team-logo" accept="image/*" />
-        <button onclick="addTeam()">Add Team</button>
-        <p id="team-message"></p>
-        <h3>Team List</h3>
-        <div id="team-list"></div>
-      </div>
-
-      <div class="form-box">
-        <h3>Add Player</h3>
-        <input type="text" id="player-name" placeholder="Player Name" />
-        <select id="player-team">
-          <option value="">Select Team</option>
-        </select>
-        <label><input type="radio" name="is-captain" id="is-captain" /> Captain</label>
-        <button onclick="addPlayer()">Add Player</button>
-        <p id="player-message"></p>
-        <h3>Player List</h3>
-        <div id="player-list"></div>
-      </div>
-    </section>
-  </main>
-
-  <script src="admin.js"></script>
-
-<script>
-const backendURL = "https://spl-auction-backend.onrender.com";
-
-// Submit new team
-function submitTeam() {
-  const name = document.getElementById("team-name").value;
-  const logo = document.getElementById("team-logo").value;
-
-  fetch(`${backendURL}/api/teams`, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ name, logo })
-  }).then(res => res.json())
-    .then(data => alert("Team added successfully"))
-    .catch(err => alert("Error adding team"));
-}
-
-// Submit new player
-function submitPlayer() {
-  const name = document.getElementById("player-name").value;
-  const role = document.getElementById("player-role").value;
-  const isCaptain = document.querySelector("input[name='isCaptain']:checked")?.value === "true";
-  const teamId = document.getElementById("player-team").value;
-
-  fetch(`${backendURL}/api/players`, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ name, role, isCaptain, team_id: teamId })
-  }).then(res => res.json())
-    .then(data => alert("Player added successfully"))
-    .catch(err => alert("Error adding player"));
-}
-</script>
-
+    <script src="admin.js"></script>
 </body>
 </html>
+    
